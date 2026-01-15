@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { Dashboard } from './pages/Dashboard';
+import { Profile } from './pages/Profile';
 import './App.css';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -30,6 +31,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }
       />

@@ -2,6 +2,29 @@
 // This is a mock implementation for testing without Firebase credentials
 // Replace with real Firebase when you have credentials
 
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+
+// Initialize Firestore (optional - for demo it won't connect without real credentials)
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'demo-key',
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'demo.firebaseapp.com',
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'my-react-firebase-login-system',
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'demo.appspot.com',
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || 'demo',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || 'demo',
+};
+
+let db: any = null;
+try {
+  const app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+} catch (error) {
+  console.log('Firestore not initialized - using mock data');
+}
+
+export { db };
+
 export interface User {
   uid: string;
   email: string;
@@ -20,6 +43,10 @@ class MockAuth {
     const stored = localStorage.getItem('mockAuthUser');
     if (stored) {
       this.currentUser = JSON.parse(stored);
+    }
+    const storedUsers = localStorage.getItem('mockUsers');
+    if (storedUsers) {
+      this.users = new Map(JSON.parse(storedUsers));
     }
   }
 

@@ -85,7 +85,15 @@
   margin-bottom: 2rem;
 }
 
-.dashboard-container button {
+.dashboard-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile-button,
+.logout-button {
   padding: 0.75rem 1.5rem;
   background: white;
   color: #667eea;
@@ -96,6 +104,7 @@
   transition: background 0.3s;
 }
 
-.dashboard-container button:hover {
+.profile-button:hover,
+.logout-button:hover {
   background: #f0f0f0;
 }
